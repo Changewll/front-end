@@ -1,0 +1,132 @@
+<!-- 看完教程后重新布局 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_网易新闻列表</title>
+    <style>
+        /* 整体 */
+        *{
+            /* 去除默认样式 */
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        /* body{
+            background-color: lavender;
+        } */
+        .news_wrapper{
+            /* 整体布局 */
+            width: 300px;
+            height: 350px;
+            background-color: mintcream;
+            margin: 50px auto;
+            /* border-top: 5px rgb(184, 10, 10) ; */
+        }
+        a{
+            /* 去除超链接样式 */
+            text-decoration: none;
+        }
+        /* 标题 */
+        .news_title{
+             height: 41px;
+             border-top:#ddeedd 1px solid;
+        }
+
+        .news_title .title{
+            width: 82px;
+            height: 21px;
+            line-height: 21px;
+            border-top: red 1px solid;
+            margin-top: -1px;
+            padding-top: 8px;
+        }
+        .title a{
+            font-size: 16px;
+            font-weight: bold;
+            color: #404040;
+        }
+        .title a:hover{
+            color: red;
+        }
+        .title span{
+            font-size: 16px;
+            color: silver;
+        }
+        /* 图片 */
+        .news_img{
+            height: 150px;
+        }
+        .news_img .news_img_title{
+            height: 40px;
+            margin-top: -40px;
+            margin-left: 30px;
+            padding-left: 20px;
+            /* line-height: 40px; */
+        }
+        .news_img h3{
+            font-size: 16px;
+            color: whitesmoke;
+        }
+        /* .news_img img:hover{
+            transform: scale(2);
+        } */
+        /* 标题列表 */
+        .news_list{
+            margin-top:18px;
+
+        }
+        .news_list li{
+            margin-top: 15px;
+            padding-left: 15px;
+        }
+        .news_list a{
+            font-size: 14px;
+            color: rgb(112, 128, 144);
+        }
+        .news_list a:hover{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="news_wrapper">
+        <div class="news_title">
+            <h2 class="title">
+                <a href="https://war.163.com/">军事</a><span>·</span><a href="https://news.163.com/air/">航空</a>
+                
+                
+            </h2>
+        </div>
+        <div class="news_img">
+            <a href="https://www.163.com/dy/article/GLUHHDKJ0552G199.html">
+                <img src="./img/03/2.png" alt="军事航空新闻插图">
+                <div class="news_img_title">
+                    <h3>"双十"前回看大规模战机巡航</h3>
+                </div>
+            </a>
+
+        </div>
+        <ul class="news_list">
+            <li>
+                · <a href="#">美撤军后首次与阿塔会谈</a>
+            </li>
+            <li>
+                · <a href="#">美潜艇南海撞机是中国渔民立功？专家发声</a>
+            </li>
+            <li>
+                · <a href="#">可装集装箱的无人运输机在汉研制</a>
+            </li>
+            <li>
+                · <a href="#">给地球做"CT""中国制造"显身手</a>
+            </li>
+        </ul>
+
+    </div>
+</body>
+
+</html>
