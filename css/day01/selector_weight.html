@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择器的权重</title>
+    <style>
+        .red{
+            background-color: rgb(219,159,184,.5);
+            width: 500px;
+            height: 200px;
+        }
+        #span1{
+            background-color: thistle;
+            font-size: 20px;
+            width: 1000px;
+            height: 200px;
+        }
+
+        *{
+            font-size: 25px;
+        }
+        .box1{
+            width: 200px;
+            height: 200px;
+            background-color: cornflowerblue;
+        }
+        .box2{
+            width: 50%;
+            height: 50%;
+            background-color:darksalmon;
+        }
+        .box3{
+            width: 10em;
+            height: 10em;
+            background-color:indianred;
+        }
+        .box4{
+            font-size: 20px;
+            width: 10em;
+            height: 10em;
+            background-color:skyblue;
+        }
+        .box5{
+            font-size: 20px;
+            width: 10rem;
+            height: 10rem;
+            background-color:darkorange;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1" class="red" >我是div1
+    <span id="span1">我是div1中的span1</span>
+    </div>
+    
+    <div class="box1">
+        <div class="box2"></div>
+    </div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
+</body>
+</html>
