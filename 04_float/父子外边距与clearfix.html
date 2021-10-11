@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clearfix</title>
+    <link rel="stylesheet" href="../exercise/reset.css">
+    <style>
+        .box1{
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+        /* .box1::before{
+            /* height: 100px;
+            content: '';
+            display: table;
+        } */ 
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            margin-top: 100px;
+            float: left;
+        }
+
+        .clearfix::before,.clearfix::after{
+            content: '';
+            display:table;
+            clear:both;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box1 clearfix">
+        <div class="box2"></div>
+    </div>
+</body>
+</html>
