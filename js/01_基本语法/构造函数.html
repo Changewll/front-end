@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构造函数</title>
+    <script>
+        // function Person(name, age, gender){
+        //     this.name = name;
+        //     this.age = age; 
+        //     this.gender = gender;
+        //     this.sayName = function(){
+        //         alert("Hello大家好，我是" + this.name);
+        //     }
+        // }
+
+        // var per = new Person("小可爱", 3, "女");
+        // var per1 = new Person("大可爱", 5, "男");
+        // per.sayName();
+        // per1.sayName();
+        // console.log(typeof sayName);//undefined
+        // console.log(typeof per.sayName);//function
+        // console.log(typeof per1.sayName());//undefined
+        // console.log(per.sayName == per1.sayName);//false
+
+        // function Dog(name, age) {
+        //     this.name = name;
+        //     this.age = age; 
+        //     this.sayName = fun;
+        // }
+
+        // function fun() {
+        //     alert("我是一只小狗，我叫" + this.name);  
+        // }
+
+        // var dog = new Dog("小黄", 1);
+        // dog.sayName();
+        // console.log(typeof name);//string
+        // console.log(typeof sayName);//undefined
+        // console.log(typeof dog);//object
+
+        // // console.log(typeof sayName());//Uncaught ReferenceError: sayName is not defined
+        // console.log(typeof dog.sayName);//function
+        // console.log(typeof dog.sayName());//undefined
+        //工厂方法创建对象
+        function creatPerson(name, age, gender) {
+            var obj = new Object();
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+            obj.sayName = function () {
+                alert("creatPerson中的name:" + this.name);
+            }
+            return obj;
+        }
+        var per1 = creatPerson("小可爱", 3, "女");
+        var per2 = creatPerson("大可爱", 5, "男");
+        console.log(per1);//object creatPerson返回值为obj
+        per1.sayName();
+        console.log(per1.sayName());//undefined 没有返回值
+        console.log(per1.sayName);//function 
+        console.log(typeof per1.sayName());//undefined 
+        console.log(typeof per1.sayName);//function 
+
+        
+       //构造函数创建对象
+       function Person(name, age, gender){
+           this.name = name;
+           this.age = age;
+           this.gender = gender;
+           this.sayName = function(){
+            alert("Person中的name:" + this.name);
+           }
+       }
+       var per3 = new Person("小明", 20, "男");
+       console.log(per3);//object
+       function Dog(name, age){
+           this.name = name;
+           this.age = age;
+           this.sayHello = function(){
+               alert("wangwang");
+           }
+
+       }
+
+       //将构造函数中的方法提出来
+       function Cat(name, age){
+           this.name = name;
+           this.age = age;
+           this.sayHi = fun;
+       }
+
+       function fun(){
+           alert("Hi~我是"+this.name);
+           return this.age;
+       }
+
+       var cat = new Cat("喵喵", 2);
+       cat.sayHi();
+       console.log(cat);//object
+       console.log(cat.sayHi);//function
+       console.log(cat.sayHi());//2
+       console.log(cat.name);//喵喵
+    //    console.log(cat.sayHi());
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+    <script>
+        var z = function (x, y) {
+            return x + y;
+        }
+        console.log(typeof z);//function
+        console.log(typeof z(2, 3));//number
+        var w = function (x, y) {
+            return x + y;
+        }(2, 3);
+        console.log(typeof w);//number
+        var fun = new Function(alert("这是一个由Function构造的函数"))
+        console.log(typeof fun);//function
+        console.log(typeof Function);//function
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

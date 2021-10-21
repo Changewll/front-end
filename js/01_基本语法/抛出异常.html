@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抛出异常</title>
+    <script src="./fun_add.js"></script>
+    <script>
+        alert("准备好了吗");
+        var str = "我准备好了";
+        document.write(str);
+        console.log("那就开始吧");
+        try{
+            alert(add(2, 3));
+        }
+        catch(e){
+            alert(e.message);
+        }
+        finally{
+            alert("end");
+        }
+    </script>
+</head>
+
+<body>
+    
+</body>
+
+</html>

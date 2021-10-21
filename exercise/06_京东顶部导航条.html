@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06_京东顶部导航条</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="../06_font/fontawesome/css/all.css">
+    <style>
+        /* 1.设置外部容器 */
+        .top-bar-wrapper{
+            width: 100%;
+            background-color: #E3E4E5;
+            /* height: 30px; */
+            line-height: 30px;
+            border-bottom: #ddd 1px solid;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 外部容器 -->
+    <div class="top-bar-wrapper">
+        <!-- 内部容器 -->
+        <div class="top-bar">
+            <!-- 左侧位置信息 -->
+            <div class="location">
+                <div class="current-location">
+                    <a href="javascript:;">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>广东</span>
+                    </a>
+                </div>
+            </div>
+            <!-- 右侧菜单 -->
+            <div class="shortcut">
+                <ul>
+                    <li>
+                        <a href="javascript:;">你好，请登录</a>
+                        <a href="#">免费注册</a>
+                    </li>
+                    <!-- 分割线 -->
+                    <li class="splitline">|</li>
+                    <li>
+                        <a href="javascript:;">我的订单</a>
+                    </li>
+                    <li class="splitline">|</li>
+                    <li>
+                        <a href="javascript:;">我的京东</a>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="splitline">|</li>
+                    <li>
+                        <a href="javascript:;">京东会员</a>
+                    </li>
+                    <li class="splitline">|</li>
+                    <li>
+                        <a href="javascript:;">企业采购</a>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="splitline">|</li>
+                    <li>
+                        <span>客户服务</span>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="splitline">|</li>
+                    <li>
+                        <span>网站导航</span>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="splitline">|</li>
+                    <li>
+                        <span>手机京东</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
