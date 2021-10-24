@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组的去重练习</title>
+    <script>
+        var arr = [1, 2, 2, 2, 5, 5, 8, 2, 2, 7, 5, 6];//[ 1, 2, 2, 5, 8, 7, 6 ] i=2,j=6时会去掉一个2
+        
+        for(var i = 0; i < arr.length; i++){
+            for(var j = i+1 ; j < arr.length; j++){
+                if(arr[i] == arr[j]){
+                    arr.splice(j, 1);
+                    j--;//[ 1, 2, 5, 8, 7, 6 ]
+                }
+            }
+
+        }
+        console.log(arr);
+    </Script>
+</head>
+<body>
+    
+</body>
+</html>
