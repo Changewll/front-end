@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+    <script>
+        var arr = ["dog", "cat"];
+        var arr1 = ["pig"];
+        var result = arr.concat(arr1,"monkey","elephant");
+        console.log("arr="+arr+",result="+result);
+
+        result = arr.join();
+        console.log(result);
+        result = arr.join("~");
+        console.log(result);
+        result = arr.join("");
+        console.log(result);
+        console.log(arr);
+
+        var arr2 = ["b", "d", "a", "e", "g"];
+        result = arr2.reverse();
+        console.log(arr2);
+        console.log(result);
+        result = arr2.sort();
+        console.log(arr2);
+        console.log(result);
+
+        var arr3 = [2, 6, 3, 9, 5, 2, 15, 8];
+        arr3.sort();//[ 15, 2, 2, 3, 5, 6, 8, 9 ]根据unicode来排序
+        console.log(arr3);
+        arr3.sort(function(a, b){
+            // if(a>b){
+            //     return 1;
+            // }else if(a<b){
+            //     return -1;
+            // }else{
+            //     return 0;
+            // }
+            // return a-b;//升序
+            return b-a;//降序
+        })
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

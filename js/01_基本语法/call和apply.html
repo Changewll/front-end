@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call apply</title>
+    <script>
+        function fun(){
+            alert(this);
+        }
+        fun();
+        fun.call();
+        fun.apply();
+        var obj = {};
+        fun();
+        fun.call(obj);
+        fun.apply(obj);
+        function fun1(a, b){
+            alert("a="+a+",b="+b);
+        }
+        fun1();
+        fun1.call(obj, 2, 3);
+        fun1.apply(obj, [2, 3]);
+
+        var obj1 = {
+            name : "obj1",
+            sayName : function(){
+                alert(this.name);
+            }
+        };
+        var obj2 = {
+            name : "obj2",
+            sayName : function(){
+                alert(this.name);
+            }
+        };
+
+        obj1.sayName.call(obj2);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

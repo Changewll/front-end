@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM查询</title>
+    <link rel="stylesheet" href="../reset.css">
+    <style>
+        .inner1{
+            width: 500px;
+            border: 1px solid;
+            margin: 20px auto;
+            padding: 10px 0;
+            padding-left: 5px;
+        }
+        
+        /* ul{
+            border: 1px solid;
+            background-color: brown;
+        } */
+        /* .clearfix::after{
+            content: a;
+            clear: both;
+        } */
+        #city li,#game li,#phone li{
+            float: left;
+            border: 1px solid;
+            padding: 5px;
+            font-size:inherit;
+            background-color: #0c0;
+            margin-right: 10px;
+            margin-top: 26px;
+            /* text-align: center; */
+        }
+        /*解决li浮动后ul高度塌陷的问题，记得在class里添加clearfix*/
+        .clearfix::before,
+        .clearfix::after{
+            content:'';
+            display: table;
+            clear:left;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="total">
+        <div class="inner1">
+            <p>你喜欢哪个城市？</p>
+            <ul class="clearfix" id="city">
+                <li id="bj">北京</li>
+                <li id="sh">上海</li>
+                <li id="dj">东京</li>
+                <li id="se">首尔</li>
+            </ul>
+            <br><br>
+            <p>你喜欢哪款单机游戏？</p>
+            <ul class="clearfix" id="game">
+                <li id="hj">红警</li>
+                <li id="sk">实况</li>
+                <li id="jpfc">极品飞车</li>
+                <li id="ms">魔兽</li>
+            </ul>
+            <br><br>
+            <p>你手机的操作系统是？</p>
+            <ul class="clearfix" id="phone">
+                <li id="ios">IOS</li>
+                <li id="android">Android</li>
+                <li id="win">Windows Phone</li>
+            </ul>  
+            <br>   
+        </div>
+
+        <div class="inner2">
+            gender:
+            <input type="radio" name="gender" value="male">male
+            <input type="radio" name="gender" value="female">female
+            <br>
+            name:
+            <input type="text" name="name" id="username">
+        </div>
+
+        <div id="btnlist">
+            <div><button id="btn01">查找#bj节点</button></div>
+            <div><button id="btn02">查找所有li节点</button></div>
+            <div><button id="btn03">查找所有name=gender节点</button></div>
+            <div><button id="btn04">查找#city节点</button></div>
+            <div><button id="btn05">查找#city节点下的所有子节点</button></div>
+            <div><button id="btn06">查找#phone的第一个子节点</button></div>
+            <div><button id="btn07">返回#Android的前一个兄弟节点</button></div>
+            <div><button id="btn08">读取#username的value属性值</button></div>
+            <div><button id="btn09">设置#username的value属性值</button></div>
+            <div><button id="btn010">查找#bj的父节点</button></div>
+            <div><button id="btn011">查找#bj的文本值</button></div>
+
+        </div>
+    </div>
+</body>
+</html>

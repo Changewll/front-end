@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档的加载</title>
+    <script>
+        //自上而下执行，所以在这里的语句会先执行
+        //要想先出现button，要为事件onload添加响应函数
+        //即页面加载完后才执行这里的代码
+        // alert("hello");
+        window.onload = function(){
+            // alert("hello");
+            var btn = document.getElementById("btn");
+            btn.onclick = function(){
+                alert("hello");
+            };
+        };
+    </script>
+</head>
+<body>
+    <button id="btn">点我一下</button>
+</body>
+</html>
