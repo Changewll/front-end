@@ -8,6 +8,8 @@
     <title>全选练习</title>
     <script>
         window.onload = function () {
+
+
             //全选按钮:点击按钮后，四个多选框全都被选中
             //checkedAllBtn
             var checkedAllBtn = document.getElementById("checkedAllBtn");
@@ -16,6 +18,7 @@
                 for (var i = 0; i < items.length; i++) {
                     items[i].checked = true;
                 }
+                checkedAllBox.checked = true;
             };
 
             //全不选按钮：点击按钮后，四个多选框都不被选中
@@ -26,6 +29,7 @@
                 for (var i = 0; i < items.length; i++) {
                     items[i].checked = false;
                 }
+                checkedAllBox.checked = true;
             };
             //反选：点击按钮后，已选的变未选，未选的变已选
             //checkedRevBtn
@@ -61,26 +65,46 @@
             //全选/全不选框
             //checkedAllBox
             var checkedAllBox = document.getElementById("checkedAllBox");
-            checkedAllBox.onclick = function(){
+            checkedAllBox.onclick = function () {
                 var items = document.getElementsByName("items");
-                for(var i=0; i<items.length; i++){
+                for (var i = 0; i < items.length; i++) {
+
                     items[i].checked = checkedAllBox.checked;
                 }
-                //当四个全选或者全不选的时候checkedAllBox也要选中
-                for(var i=0; i<items.length; i++){
-                    var arr = 0;
-                    arr += items[i].checked;
-                }
-                console.log(arr);
-                if(arr==0||arr==4){
 
-                    checkedAllBox.checked = true;
-                }else{
-                    checkedAllBox.checked = false;
-                }
+                // for(var i=0; i<items.length; i++){
+                //     var arr = 0;
+                //     arr += items[i].checked;
+                // }
+                // console.log(arr);
+                // if(arr==0||arr==4){
+
+                //     checkedAllBox.checked = true;
+                // }else{
+                //     checkedAllBox.checked = false;
+                // }
+
 
             };
-
+            //初始化
+            var items = document.getElementsByName("items");
+            for (var i = 0; i < items.length; i++) {
+                items[i].checked = false;
+            }
+            checkedAllBox.checked = true;
+            //当四个全选或者全不选的时候checkedAllBox也要选中
+            //为四个多选框分别绑定点击响应函数
+            for (var i = 0; i < items.length; i++) {
+                items[i].onclick = function () {
+                    checkedAllBox.checked = true;
+                    for (var j = 0; j < items.length; j++) {
+                        if (!items[j].checked) {
+                            checkedAllBox.checked = false;
+                            break;
+                        }
+                    }
+                };
+            }
 
             // checkedAllBtn.ondblclick = function(){
             //     var items = document.getElementsByName("items");
@@ -89,6 +113,7 @@
             //         items[i].checked = false;
             //     }
             // };
+            
         };
 
     </script>
