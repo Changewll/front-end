@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM查询</title>
+    <script>
+        window.onload = function(){
+            //获取body标签
+            var body = document.getElementsByTagName("body")[0];
+            console.log(body);
+            //在document中有一个属性body，保存的是对body的引用
+            var body = document.body;
+            console.log(body);
+            console.log(typeof body);
+            //document.documentElement保存的是html根标签
+            var html = document.documentElement;
+            console.log(html);
+        };
+    </script>
+</head>
+<body>
+    <div class="box1">
+        <div></div>
+    </div>
+    <div></div>
+</body>
+</html>
