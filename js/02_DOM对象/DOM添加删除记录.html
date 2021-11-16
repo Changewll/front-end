@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM添加删除记录</title>
+    <style>
+        #employeeTable {
+            margin: 10px auto;
+            border: 1px black solid;
+        }
+
+        #formDiv {
+            border: 1px black solid;
+            width: max-content;
+            margin: 10px auto;
+            padding: 10px;
+        }
+
+        #submit {
+            margin: 10px 80px;
+        }
+    </style>
+    <script>
+        function delA() {
+            //点击超链接删除员工信息
+            var tr = this.parentNode.parentNode;
+            var name = tr.getElementsByTagName("td")[0].innerHTML;
+            var flag = confirm("确定要删除员工" + name + "的信息吗？");
+            if (flag) {
+                tr.parentNode.removeChild(tr);
+            }
+        }
+        window.onload = function () {
+            //点击超链接后删除一个员工的信息
+            var a = document.getElementsByTagName("a");
+            for (var i = 0; i < a.length; i++) {
+                //for循环会在页面加载完成之后立即执行，而响应函数会在超链接被点击时才执行，当响应函数执行时for循环早已执行完毕，此时i=3
+                 //a[i].onclick = function(){
+                //     //错误：var tr = a[i].parentNode.parentNode;  i=3,a[3]undefined
+                //     //this是点击的那个超链接
+                 //var tr = this.parentNode.parentNode;
+                //     //获取要删除员工的姓名
+                //     //var name = tr.children[0].innerHTML;
+                //     var name = tr.getElementsByTagName("td")[0].innerHTML;
+                //     var flag = confirm("确定要删除员工"+name+"的信息吗？");
+                //     if(flag){
+                //         tr.parentNode.removeChild(tr);
+                //     }
+                //     //如果超链接有跳转页面，要加return false，或者超链接设置javascript:;
+                //     //return false;
+                // };
+                a[i].onclick = delA;
+            }
+            //输入员工信息并点击提交后，新员工信息添加到employeeTable中
+            //1.为提交添加响应函数并获取信息值 2.创建新节点tr 3.创建新节点td*4 4.创建新节点a 5.文本节点 6.父子节点关联
+            var submit = document.getElementById("submit");
+            submit.onclick = function () {
+
+                var newName = document.getElementById("empName").value;
+                var newEmail = document.getElementById("email").value;
+                var newSalary = document.getElementById("salary").value;
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                td1.innerHTML = newName;
+                var td2 = document.createElement("td");
+                td2.innerHTML = newEmail;
+                var td3 = document.createElement("td");
+                td3.innerHTML = newSalary;
+                var td4 = document.createElement("td");
+                td4.innerHTML = "<a href=\"javascript:;\" >Delete</a>";
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+                //浏览器自动在table中生成一个tbody，所有tr放在tbody中，如果直接用employeeTable.appendChild(tr)，会使新tr在tbody外
+                var employeeTable = document.getElementById("employeeTable");
+                var tbody = employeeTable.getElementsByTagName("tbody")[0];
+                tbody.appendChild(tr);
+                //删除整个tr
+                var a = td4.getElementsByTagName("a")[0];
+                // a.onclick = function(){
+                //     var flag = confirm("确定要删除员工"+td1.innerHTML+"的信息吗？");
+                //     if(flag){
+                //         tr.parentNode.removeChild(tr);
+                //     }
+                a.onclick = delA;
+            };
+        };
+        
+    </script>
+</head>
+
+<body>
+    <table id="employeeTable">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>jerry@sohu.com</td>
+            <td>8000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>bob@tom.com</td>
+            <td>10000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+    </table>
+
+    <div id="formDiv">
+        <h5>添加新员工</h5>
+        <table>
+            <tr>
+                <td class="word">name:</td>
+                <td class="inp">
+                    <input type="text" name="empName" id="empName">
+                </td>
+            </tr>
+            <tr>
+                <td class="word">email:</td>
+                <td class="inp">
+                    <input type="text" name="email" id="email">
+                </td>
+            </tr>
+            <tr>
+                <td class="word">salary:</td>
+                <td class="inp">
+                    <input type="text" name="salary" id="salary">
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="提交" id="submit">
+    </div>
+</body>
+
+</html>

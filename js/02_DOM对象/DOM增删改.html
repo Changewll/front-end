@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM增删改</title>
+    <script>
+        window.onload = function(){
+            function myClick(btnStr, func) {
+                var btn = document.getElementById(btnStr);
+                btn.onclick = func;
+            }
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick = function(){
+                //创建一个“广州”节点添加到#city下
+                //父节点.appendChild(子节点)
+                //1.创建li节点 2.创建“广州”文本节点 3.文本节点插入到li节点 4.li节点插入到ul节点(city)
+                var li = document.createElement("li");
+                var gzText = document.createTextNode("广州");
+                li.appendChild(gzText);
+                var city = document.getElementById("city");
+                city.appendChild(li);
+            }
+
+            var btn02 = document.getElementById("btn02");
+            btn02.onclick = function(){
+                //将“广州”节点插入到#bj前面
+                //父节点.insertBefore(新子节点，旧子节点)
+                var li = document.createElement("li");
+                var gzText = document.createTextNode("广州");
+                li.appendChild(gzText);
+                var city = document.getElementById("city");
+                var bj = document.getElementById("bj");
+                city.insertBefore(li, bj);
+            }
+
+            myClick("btn03", function(){
+                //使用“广州”节点替换#bj节点
+                //父节点.replaceChild(新子节点，旧子节点)
+                var li = document.createElement("li");
+                var gzText = document.createTextNode("广州");
+                li.appendChild(gzText);
+                var city = document.getElementById("city");
+                var bj = document.getElementById("bj");
+                city.replaceChild(li, bj);
+            });
+
+            myClick("btn04", function(){
+                //删除#bj节点
+                //父节点.removeChild(子节点)
+                //子节点.parentNode.removeChild(子节点)
+                var city = document.getElementById("city");
+                var bj = document.getElementById("bj");
+                //city.removeChild(bj);
+                bj.parentNode.removeChild(bj);
+            });
+
+            myClick("btn05", function(){
+                //读取#city内的HTML代码
+                var city = document.getElementById("city");
+                console.log(city.innerHTML);
+            });
+
+            myClick("btn06", function(){
+                //设置#bj内的HTML代码
+                var bj = document.getElementById("bj");
+                //console.log(bj.innerHTML);
+                bj.innerHTML = prompt("请输入一个城市名：");
+                console.log(bj.innerHTML);
+            });
+
+            myClick("btn07", function(){
+                //创建一个“广州”节点添加到#city下
+                //用innerHTML（修改全部）代替appendChild(只修改一个)
+                // var city = document.getElementById("city");
+                // city.innerHTML = "<li>广州</li>";
+                //推荐两种方法结合
+                var city = document.getElementById("city");
+                var li = document.createElement("li");
+                li.innerHTML = "广州";
+                city.appendChild(li);
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id="total">
+        <div id="inner">
+            <p>你喜欢哪个城市？</p>
+            <ul id="city">
+                <li id="bj">北京</li>
+                <li>上海</li>
+                <li>东京</li>
+                <li>首尔</li>
+            </ul>
+        </div>
+        <div id="btnlist">
+            <div><button id="btn01">创建一个“广州”节点添加到#city下</button></div>
+            <div><button id="btn02">将“广州”节点插入到#bj前面</button></div>
+            <div><button id="btn03">使用“广州”节点替换#bj节点</button></div>
+            <div><button id="btn04">删除#bj节点</button></div>
+            <div><button id="btn05">读取#city内的HTML代码</button></div>
+            <div><button id="btn06">设置#bj内的HTML代码</button></div>
+            <div><button id="btn07">创建一个“广州”节点添加到#city下</button></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
