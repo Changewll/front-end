@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作CSS的其他属性</title>
+    <style>
+        #box1{
+            width: 1000px;
+            height: 500px;
+            background-color: red;
+            padding: 10px;
+            border: 10px solid yellow;
+            
+        }
+        #box2{
+            width: 500px;
+            height: 200px;
+            padding: 10px;
+            border: 10px solid rgb(155, 58, 158);
+            background-color: #bfa;
+            overflow: scroll;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var btn01 = document.getElementById("btn01");
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            btn01.onclick = function(){
+                //alert(getComputedStyle(box1, null)["width"]);
+                console.log(getComputedStyle(box1, null).width);
+                console.log("1."+box1.clientWidth);
+                console.log("2."+box1.clientHeight);
+                console.log("3."+box1.offsetWidth);
+                console.log("4."+box1.offsetHeight);
+                console.log("5."+box1.offsetParent.id);
+                console.log("6."+box1.offsetLeft);
+                console.log("7."+box1.offsetTop);
+                console.log("8."+box2.scrollWidth);//1049
+                console.log("9."+box2.scrollHeight);//549
+                console.log("10."+box2.scrollLeft);//
+                console.log("11."+box2.scrollTop);
+                console.log("12."+box2.clientWidth);//501
+                console.log("13."+box2.clientHeight);//201
+                console.log("14."+(box2.scrollHeight - box2.scrollTop));
+                //拉到最下box2.scrollHeight - box2.scrollTop == box2.clientHeight
+
+
+            };
+           // var btn02 = document.getElementById("btn02");
+            //var box1 = document.getElementById("box2");
+        };
+    </script>
+</head>
+<body>
+    <button id="btn01">点我一下</button>
+    <br><br>
+    <div id="box2" style="position: relative;">
+        <div id="box1"></div>
+    </div>
+    <br><br>
+    <button id="btn02">点我一下</button>
+    <br>
+    <div id="box3">
+        <div id="box4"></div>
+    </div>
+    
+</body>
+</html>

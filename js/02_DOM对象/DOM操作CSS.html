@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM操作CSS（内联操作）</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var box1 = document.getElementById("box1");
+            btn01.onclick = function () {
+                box1.style.backgroundColor = "yellow";
+            };
+            btn02.onclick = function () {
+                alert(box1.style.backgroundColor);
+            };
+            //获取当前样式
+            var btn03 = document.getElementById("btn03");
+            btn03.onclick = function () {
+                //ie
+                //alert(box1.currentStyle.backgroundColor);
+                //其他浏览器及ie9以上
+                // alert(getComputedStyle(box1, null).backgroundColor);
+                alert(getStyle(box1, "width"));
+            };
+            //定义一个函数，获取指定元素的当前样式
+            //参数：obj-获取样式的元素 name-获取的样式名
+
+        };
+        function getStyle(obj, name) {
+            //正常浏览器方式
+            //.name返回undefined
+            //alert(getComputedStyle);
+            //getComputedStyle是一个变量，在全局找不到的话会直接报错而不是返回false
+            //所以用window.getComputedStyle，是一个属性
+            if(getComputedStyle){
+                return getComputedStyle(obj, null)[name];
+            }else{
+                return obj.currentStyle[name];
+            }
+            //return window.getComputedStyle?getComputedStyle(obj, null)[name]:obj.currentStyle[name];
+            
+        }
+    </script>
+
 </head>
+
 <body>
     <button id="btn01">点我一下</button>
     <button id="btn02">点我一下</button>
+    <button id="btn03">点我一下</button>
     <br>
     <div id="box1"></div>
 </body>
+
 </html>

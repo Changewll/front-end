@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片切换</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #outer{
+            width: 533px;
+            /* height: 350px; */
+            margin: 10px auto;
+            padding:10px;
+            background-color: bisque;
+            text-align: center;
+        }
+        img{
+            width: 500px;
+            height: 350px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var imgList = ["../img/01.webp", "../img/02.webp", "../img/03.webp", "../img/04.webp", "../img/05.webp"]
+            var preBtn = document.getElementById("prev");
+            var nextBtn = document.getElementById("next");
+            var index = 0;
+            //不但要获取img，还要获取第一个元素，因为就算只有一个元素返回的也是数组
+            var img = document.getElementsByTagName("img")[0];
+            // alert(img[0]);
+            preBtn.onclick = function(){
+                // alert("hello");
+                index--;
+                if(index<0){
+                    index = imgList.length - 1;
+                }
+                //记住先获取img
+                img.src = imgList[index];
+                
+            };
+            nextBtn.onclick = function(){
+                index++;
+                if(index>imgList.length - 1){
+                    index = 0;
+                }
+                img.src = imgList[index];
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <p>一共5张图片，现在是第1张</p>
+        <img src="../img/01.webp" alt="哔哩哔哩">
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+</body>
+</html>

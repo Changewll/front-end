@@ -17,11 +17,38 @@
             //document.documentElement保存的是html根标签
             var html = document.documentElement;
             console.log(html);
+            //document.all代表页面所有元素
+            var all = document.all;
+            console.log(all.length);
+            console.log(all);
+            all = document.getElementsByTagName("*");
+            console.log(all.length);
+            //查找一个类下的所有元素
+            //document.getElementsByClassName不适用于IE8
+            //document.querySelector返回数组的第一个元素
+            //document.querySelectorAll返回整个数组
+            var box1 = document.getElementsByClassName("box1");
+            console.log(box1.length);
+            var div = document.getElementsByTagName("div");
+            console.log(div);
+            //获取.box1中所有的div
+            var div = document.querySelector(".box1 div");
+            var box1 = document.querySelector(".box1");
+            console.log(div);
+            // console.log(div.length);
+            console.log(div.innerHTML);
+            console.log(box1);
+            console.log(box1.innerHTML);
+            var div = document.querySelectorAll(".box1 div");
+            var box1 = document.querySelectorAll(".box1");
+            console.log(div);
+            console.log(box1);
         };
     </script>
 </head>
 <body>
-    <div class="box1">
+    <div class="box1">Hello
+        <div></div>
         <div></div>
     </div>
     <div></div>
