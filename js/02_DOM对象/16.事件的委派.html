@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的委派</title>
+    <script>
+        function addAlert(){
+            //aAll[i]的点击响应函数
+            alert("我是超链接"+this.innerText[3]);
+        }
+        window.onload = function(){
+            var btn01 = document.getElementById("btn01");
+            var ul01 = document.getElementById("ul01");
+            
+            var aAll = document.getElementsByTagName("a");
+            for(var i=0; i<aAll.length; i++){
+                // aAll[i].onclick = function(){
+                //     alert("我是超链接"+i);
+                // };
+                //这里只能给本身已有的超链接添加alert
+                aAll[i].onclick = addAlert;
+            }
+            btn01.onclick = function(){
+                var li = document.createElement("li");
+                li.innerHTML = "<a href='javascript:;'>超链接</a>";
+                ul01.appendChild(li);
+                li.children[0].onclick = addAlert;
+            };
+        };
+    </script>
+</head>
+<body>
+    <button id="btn01">添加超链接</button>
+    <ul id="ul01">
+        <li><a href="javascript:;">超链接一</a></li>
+        <li><a href="javascript:;">超链接二</a></li>
+        <li><a href="javascript:;">超链接三</a></li>
+    </ul>
+</body>
+</html>

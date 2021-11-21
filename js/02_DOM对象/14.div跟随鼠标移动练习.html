@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div跟随鼠标移动练习</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: cornflowerblue;
+            position: absolute;
+        }
+        #box2{
+            width: 300px;
+            height: 300px;
+            background-color: #baf;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            document.onmousemove = function(event){
+                //取消冒泡不是在这里取消，要在box2中取消
+                //event.cancelBubble = true;
+                //解决兼容性问题
+                event = event || window.event;
+                //获取鼠标坐标（浏览器可见窗口）
+                var left = event.clientX;
+                var top = event.clientY;
+                //兼容ie8
+                var sl = document.documentElement.scrollLeft;
+                var st = document.documentElement.scrollTop;
+                console.log(st);
+                //设置div偏移量
+                //注意：1.加单位“px” 2.为什么不动：检查内联样式，有，要开启定位（相对和绝对都可以，但一般开绝对）
+                //3.鼠标离开div后div就不跟随鼠标移动了：事件是给box1绑定的，要改成整个页面即document
+                //4.给body设置宽高，使其出现滚动条，发现鼠标和div不一致：因为clientX和clientY是相对可见窗口的，而div偏移量是相对整个页面的，要将client改成page
+                //pageX和pageY是相对整个页面的，但在ie8不支持这两个属性
+                //第二种方法：div的偏移量加上一个scrollTop和scrollLeft，接下来要检查是谁的scrollTop
+                //console.log(document.body.scrollTop)在各浏览器都是0，所以不是body的，要找body的父元素html
+                //console.log(document.documentElement.scrollTop),滚动滚动条时数值会变
+                //还有个遗留问题：单纯滚动滚动条后鼠标不移动，div就不会跟着过来
+                box1.style.left = sl + left + "px";
+                box1.style.top = st + top + "px";
+            };
+            var box2 = document.getElementById("box2");
+            box2.onmousemove = function(event){
+                event.cancelBubble = true;
+            };
+        };
+    </script>
+</head>
+<body style="width: 1000px; height: 1000px;">
+    <div id="box2"></div>
+    <div id="box1" ></div>
+</body>
+</html>

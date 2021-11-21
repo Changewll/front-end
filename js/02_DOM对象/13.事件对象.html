@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件对象</title>
+    <style>
+        #areaDiv {
+            width: 300px;
+            height: 200px;
+            border: black 1px solid;
+            margin: 10px auto;
+        }
+
+        #showMsg {
+            width: 300px;
+            height: 50px;
+            border: black 1px solid;
+            margin: 20px auto;
+        }
+    </style>
+    <script>
+        //事件对象：当事件的响应函数被出发时，浏览器每次都会将一个事件对象作为实参传递进响应函数。
+        //在事件对象中封装了当前事件相关的一切信息，比如：鼠标的坐标 键盘按下的案件 鼠标滚轮滚动的方向 ...
+        window.onload = function(){
+            var areaDiv = document.getElementById("areaDiv");
+            var showMsg = document.getElementById("showMsg");
+            areaDiv.onmousemove = function(event){
+                //alert(event);//[object MouseEvent]
+                //event.clientX event.clientY获取当前鼠标位置(相对于整个浏览器可见窗口)
+                //在ie8及以下，event是window的一个属性
+                //解决事件对象的兼容性问题
+                if(!event){
+                    event = window.event;
+                }
+                //或者使用A||B A==true返回A A==false返回B 
+                //当数值参与逻辑或运算时，结果为true，会返回第一个为真的值；如果结果为false，会返回第二个为假的值
+                //当数值参与逻辑与运算时，结果为true，那么会返回的会是第二个为真的值；如果结果为false，返回的会是第一个为假的值
+                //逻辑与优先于逻辑或
+                //event = event || window.event;
+                var x = event.clientX;
+                var y = event.clientY;
+                //alert("x="+x+",y="+y);
+                showMsg.innerHTML = "x="+x+",y="+y;
+
+            };
+            // var body = document.getElementsByTagName("body")[0];
+            // body.onmousemove = function(event){
+            //     var x = event.clientX;
+            //     var y = event.clientY;
+            //     //alert("x="+x+",y="+y);
+            //     showMsg.innerHTML = "x="+x+",y="+y;
+
+            // };
+
+            window.onmousemove = function(event){
+                var x = event.clientX;
+                var y = event.clientY;
+                //alert("x="+x+",y="+y);
+                showMsg.innerHTML = "x="+x+",y="+y;
+
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <div id="areaDiv"></div>
+    <div id="showMsg"></div>
+</body>
+
+</html>
