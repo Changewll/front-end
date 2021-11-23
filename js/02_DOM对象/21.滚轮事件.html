@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+    <script>
+        //鼠标滑轮向上，box1变短；滑轮向下，box2变长
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            box1.onwheel = function(event){
+                //alert("hello");
+                //event.wheelDelta 在火狐undefined 在谷歌向上-120 向下120
+                //evebt.detail 在火狐0
+                //event.deltaY 在火狐向上-3 向下3 谷歌向上-100 向下100
+                //alert(event.deltaY);
+                if(event.deltaY>0){
+                    //元素.clientHeight获取元素可见高度（内容区+内边距）
+                    box1.style.height = box1.clientHeight + 10 + "px";
+                }else{
+                    if(box1.clientHeight - 10 <= 0){
+                        box1.style.height = box1.clientHeight + "px";
+                    }else{
+                        box1.style.height = box1.clientHeight - 10 + "px";
+                    } 
+                }
+                //解决浏览器有滚动条时div也随之滚动的问题 两种方法
+                //return false;
+                event.preventDefault();
+            };
+        };
+    </script>
+</head>
+<body style="height: 5000px;">
+    <div id="box1"></div>
+</body>
+</html>

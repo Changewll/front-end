@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽（二）</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            box1.onmousedown = function(event){
+                //1.解决鼠标总在拖拽元素左上角问题
+                //让元素左移：鼠标clientX-元素offsetLeft  上移同理
+                //获取点击时鼠标位置
+                //2.解决ctrl+A全选后拖拽全体问题
+                //当我们拖拽一个网页的内容时，浏览器会默认去搜索引擎中搜索内容，此时会导致拖拽功能的异常，这是浏览器提供的默认行为
+                //如果不希望发生这个行为，则可以通过return false来取消默认行为
+                //但是对ie8无效
+                //ie8中设置btn01.setCapture()对鼠标按下相关的事件进行捕获(火狐也适用)
+                //当调用一个元素的setCapture()后，这个元素会把下一次所有鼠标按下相关的事件捕获到自身上
+                //全体被拖拽实际上是因为box1的onmousedown也用在其他选中元素的onmousedown了
+                //为box1设置setCapture(),使所有按下事件都被box1捕获
+                //鼠标松开时要取消对事件的捕获releaseCapture()（好像火狐不需要）
+                box1.setCapture();
+                var sl = event.clientX - box1.offsetLeft;
+                var st = event.clientY - box1.offsetTop;
+                 
+                document.onmousemove = function(event){
+                    var left = event.clientX;
+                    var top = event.clientY;
+                    box1.style.left = left-sl + "px";
+                    box1.style.top = top-st + "px";
+                    document.onmouseup = function(){
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                        //可以不加
+                        //box1.releaseCapture();
+                    };
+                };
+                //return false;
+            };
+        };
+    </script>
+</head>
+<body>
+    <p>这里有行字</p>
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+</html>
