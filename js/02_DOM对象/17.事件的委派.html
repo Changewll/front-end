@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>委派</title>
+    <script>
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            var ul01 = document.getElementById("ul01");
+
+            btn01.onclick = function () {
+                var li = document.createElement("li");
+                li.innerHTML = "<a href='javascript:;'>我是超链接</a>";
+                ul01.appendChild(li);
+            };
+            var aAll = document.getElementsByTagName("a");
+            // for(var i=0; i<aAll.length; i++){
+            //     aAll[i].onclick
+            // }
+            ul01.onclick = function(event){
+                //通过a共同的祖先元素冒泡，但此方法会带来问题：点击非a的地方也会alert
+                //所以要设置点击区域
+                //event.target返回触发此事件的元素
+                //或者设置class 然后event.target,className
+                var flag = event.target.tagName;
+                //alert(flag);
+                if(flag=="A"){
+                     alert("我是超链接");
+                }
+               
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <button id="btn01">添加超链接</button>
+    <ul id="ul01">
+        <li><a href="javascript:;">我是超链接</a></li>
+        <li><a href="javascript:;">我是超链接</a></li>
+        <li><a href="javascript:;">我是超链接</a></li>
+    </ul>
+</body>
+
+</html>
