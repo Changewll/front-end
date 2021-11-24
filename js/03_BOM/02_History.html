@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <script>
+        //length可以获取到当前访问的链接数量
+        //alert(history.length);
+        window.onload = function(){
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            btn01.onclick = function(){
+                //back（）回到上一个页面，forward（）去下一个页面
+                history.back()
+                //history.forward();
+            };
+            btn02.onclick = function(){
+                //back（）回到上一个页面，forward（）去下一个页面
+                //history.back()
+                history.forward();
+            };
+            btn03.onclick = function(){
+                //go() 去到指定页面
+                //参数为一个整数 如1向前跳转一个页面 2向前跳转两个页面 -2向后跳转两个页面
+                history.go(2);
+            };
+
+        };
+    </script>
+</head>
+<body>
+    <button id="btn01">上一页</button>
+    <button id="btn02">下一页</button>
+    <button id="btn03">go</button>
+    <a href="./historytest3.html">去test3</a>
+    <a href="./03_Location.html">去Location</a>
+     History
+</body>
+</html>

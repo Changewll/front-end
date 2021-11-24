@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘练习</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+    </style>
+    <script>
+        //使div可以根据不同的方向键向不同的方向移动
+        /* 37-40 左上右下按左键向左移动 */
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            //为box1绑定鼠标按下事件响应函数
+            //box1.onmousedown = function(){
+                //为页面绑定键盘按下事件响应函数
+                //alert(box1.style.left);错误
+                document.onkeydown = function(event){
+                    //定义一个变量，来表示移动的速度
+                    var speed = 10;
+                    //当用户按了ctrl，移动速度加快
+                    if(event.ctrlKey){
+                        speed = 50;
+                    }
+                    switch(event.keyCode){
+                        case 37:
+                            //错误写法
+                            //box1.style.left = box1.style.left - 10 + "px";
+                            //正确写法
+                            //当前元素相对于其定位祖先元素的水平/垂直偏移量
+                            box1.style.left = box1.offsetLeft - speed + "px";
+                            break;
+                        case 38:
+                            box1.style.top = box1.offsetTop - speed + "px";
+                            break;
+                        case 39: 
+                            box1.style.left = box1.offsetLeft + speed + "px";
+                            break;
+                        case 40:
+                            box1.style.top = box1.offsetTop + speed + "px";
+                            break;
+                    }
+                };
+            //};
+        };
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+</body>
+</html>

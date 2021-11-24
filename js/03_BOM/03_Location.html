@@ -1,0 +1,38 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Location</title>
+      <script>
+          window.onload = function(){
+              var btn01 = document.getElementById("btn01");
+              var btn02 = document.getElementById("btn02");
+              btn01.onclick = function(){
+                //修改路径，点击按钮页面会自动跳转到该路径，并且会生成相应的历史记录
+                //location = "http://www.baidu.com";
+                //location = "02_History.html";
+                //assign()和上面一样
+                //location.assign("http://www.baidu.com");
+                //reload()用于重新加载当前页面，作用和刷新按钮一样
+                //如果在方法中传递一个true，作为参数，则会强制清空缓存刷新页面
+                //location.reload(true);
+                //replace()可以使用一个新的页面替换当前页面，调用完毕也会跳转页面
+                //但是不会生成历史记录，不能使用回退按钮
+                location.replace("02_History.html");
+
+              };
+              btn02.onclick = function(){
+                  location.reload(true);
+              };
+          };
+      </script>
+  </head>
+  <body>
+      <button id="btn01">跳一下</button>
+      <button id="btn02">刷新一下</button>
+      <input type="text">
+      <a href="./02_History.html">History</a>
+  </body>
+  </html>

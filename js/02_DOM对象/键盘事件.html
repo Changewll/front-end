@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘事件</title>
+    <script>
+        window.onload = function(){
+            var input = document.getElementsByTagName("input")[0];
+            input.onkeydown = function(event){
+                // if(event.keyCode == 89 && event.ctrlKey){
+                //     console.log("按键y和ctrl被按下了");
+                // }
+                //数字48-57
+                //在文本框中输入内容属于onkeydown默认行为，如果取消默认行为则输入内容不会出现在文本框中
+                //在文本框中不能出现数字的方法（正则表达式也可)
+                if(event.keyCode>=48 && event.keyCode<=57){
+                    return false;
+                }
+                
+            };
+
+            input.onkeyup = function(){
+                console.log("按键松开了");
+            };
+
+            document.onkeydown = function(event){
+                console.log(event.keyCode);
+            };
+        };
+    </script>
+
+</head>
+<body>
+    <input type="text">
+</body>
+</html>
