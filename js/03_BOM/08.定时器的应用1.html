@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的应用一</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var name = "left";
+            var timeout;
+            //box1.style.left只能读取内联样式的,所以为空白值
+            // alert(box1.style.left);
+            //getComputedStyle(box1, null)[left]没反应，因为要加双引号！！！返回8px
+            //alert(getComputedStyle(box1, null)["left"]);
+            //.left返回8px
+            //alert(getComputedStyle(box1, null).left);返回8
+            //box1.offsetLeft
+            //alert(box1.offsetLeft);
+            btn01.onclick = function(){
+                // setInterval(() => {
+                    //这么写固定只能调left了
+                //     box1.style.left = box1.offsetLeft + 1 + "px";   
+                // }, 1);
+                //关闭上一个定时器
+                clearInterval(timeout);
+                //alert(timeout);//undefined
+                timeout = setInterval(() => {
+                    //先返回timeout，点击确认后再移动
+                    //alert(timeout);//28
+                    //获取box1旧值,需要把px去掉：用parseInt
+                    var oldValue = parseInt(getComputedStyle(box1, null)[name]);
+                    //这么写只能固定调left了
+                    //var oldValue = box1.offsetLeft;
+                    var newValue = oldValue + 10;
+                    //console.log(newValue);
+                    box1.style.left = newValue + "px";
+                    //放在这点一次按钮才动一次
+                    //alert(timeout);//12
+                    //clearInterval(timeout);
+                    //当移动到800px时停止移动,注意初始为8px，如果+10的话是不会正好等于800的
+                    if(newValue >= 800){
+                        //alert("800");
+                        clearInterval(timeout);
+                    }
+                }, 30);
+                //放在这就无法开启定时器了:不太明白
+                //alert(timeout);//26
+                //clearInterval(timeout);
+            };
+            btn02.onclick = function(){
+                clearInterval(timeout);
+            };
+        };
+        
+    </script>
+</head>
+<body>
+    <button id="btn01">开始移动</button>
+    <button id="btn02">停止移动</button>
+    <br><br>
+    <div id="box1"></div>
+    
+</body>
+</html>

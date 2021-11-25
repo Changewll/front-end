@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘移动div练习（定时器）</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //存在第一下和第二下的卡顿问题
+            //方向和速度分开控制
+            //速度
+            var speed = 10;
+            //方向
+            var direct = 0;
+            
+            //开启一个定时器，来控制div的移动
+            var timeout = setInterval(function () {
+
+                switch (direct) {
+                    case 37:
+                        box1.style.left = box1.offsetLeft - speed + "px";
+                        break;
+                    case 38:
+                        box1.style.top = box1.offsetTop - speed + "px";
+                        break;
+                    case 39:
+                        box1.style.left = box1.offsetLeft + speed + "px";
+                        break;
+                    case 40:
+                        box1.style.top = box1.offsetTop + speed + "px";
+                        break;
+                }
+            }, 30);
+
+
+            document.onkeydown = function (event) {
+                if(event.ctrlKey){
+                    speed = 20;
+                }else{
+                    speed = 10;
+                }
+                direct = event.keyCode;
+            };
+            //设置停止:键盘松开时，div不再移动
+            document.onkeyup = function(event){
+                direct = 0;
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <div id="box1"></div>
+</body>
+
+</html>

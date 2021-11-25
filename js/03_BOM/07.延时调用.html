@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>延时调用</title>
+    <script>
+        window.onload = function(){
+            var count = document.getElementById("count");
+            var timer = setTimeout(function(){
+                count.innerHTML++;
+                
+            },1000);
+            clearTimeout(timer);
+           
+        //    //注意执行顺序
+        //    //<p>1</p>  setTimeout  
+        //和定时器不同，定时器的clearInterval要写在setInterval里面
+        //因为是即刻执行
+        //延时器的写在外面，因为延时才会执行？
+    //    var timeout = setTimeout(function(){
+    //         console.log("hello");
+    //     }, 1000);
+    //     clearTimeout(timeout); 
+        };
+    </script>
+</head>
+<body>
+    <p id="count">1</p>
+</body>
+</html>

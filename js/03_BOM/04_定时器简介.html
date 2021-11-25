@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器</title>
+    <script>
+        window.onload = function () {
+            var count = document.getElementById("count");
+            //开启定时器setInterval(回调函数，间隔时间)，返回一个Number类型作为该定时器标识
+            var timer = setInterval(function () {
+                count.innerHTML++;
+                //要写在开启定时器的回调函数里边
+                if (count.innerHTML == 18) {
+                    //关闭定时器clearInterval(定时器标识)
+                    clearInterval(timer);
+                }
+            }, 100);
+            
+        };
+    </script>
+</head>
+
+<body>
+    <p id="count">1</p>
+</body>
+
+</html>
