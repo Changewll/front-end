@@ -11,6 +11,17 @@
             height: 100px;
             background-color: red;
             position: absolute;
+            left: 0;
+        }
+        #box2{
+            width: opx;
+            height: 1000px;
+            border-left: 1px black solid;
+            /* 不能这么写 */
+            /* margin-left: 500px; */
+            left: 500px;
+            position: absolute;
+            top: 0;
         }
     </style>
     <script>
@@ -18,6 +29,7 @@
             var box1 = document.getElementById("box1");
             var btn01 = document.getElementById("btn01");
             var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
             var name = "left";
             var timeout;
             //box1.style.left只能读取内联样式的,所以为空白值
@@ -43,15 +55,19 @@
                     var oldValue = parseInt(getComputedStyle(box1, null)[name]);
                     //这么写只能固定调left了
                     //var oldValue = box1.offsetLeft;
-                    var newValue = oldValue + 10;
+                    var newValue = oldValue + 11;
                     //console.log(newValue);
+                    //解决超线问题
+                    if(newValue > 500){
+                        newValue = 500;
+                    }
                     box1.style.left = newValue + "px";
                     //放在这点一次按钮才动一次
                     //alert(timeout);//12
                     //clearInterval(timeout);
-                    //当移动到800px时停止移动,注意初始为8px，如果+10的话是不会正好等于800的
-                    if(newValue >= 800){
-                        //alert("800");
+                    //当移动到500px时停止移动,注意初始为8px(后面令left=0了），如果+10的话是不会正好等于500的
+                    if(newValue >= 500){
+                        //alert("500");
                         clearInterval(timeout);
                     }
                 }, 30);
@@ -62,15 +78,31 @@
             btn02.onclick = function(){
                 clearInterval(timeout);
             };
+            btn03.onclick = function(){
+                clearInterval(timeout);
+                timeout = setInterval(() => {
+                    var oldValue = parseInt(getComputedStyle(box1, null)[name]);
+                    var newValue = oldValue - 11;
+                    if(newValue<0){
+                        newValue = 0;
+                    }
+                    box1.style.left = newValue + "px";
+                    if(newValue<=0){
+                        clearInterval(timeout);
+                    }
+                }, 30);
+            };
         };
         
     </script>
 </head>
 <body>
-    <button id="btn01">开始移动</button>
+    <button id="btn01">开始向右移动</button>
     <button id="btn02">停止移动</button>
+    <button id="btn03">开始向左移动</button>
     <br><br>
     <div id="box1"></div>
+    <div id="box2"></div>
     
 </body>
 </html>

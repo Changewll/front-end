@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的应用二</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 10px;
+        }
+
+        #stopmin {
+            width: 0;
+            height: 1000px;
+            border-left: 1px black solid;
+            position: absolute;
+            left: 10px;
+        }
+
+        #stopmax {
+            width: 0;
+            height: 1000px;
+            border-left: 1px black solid;
+            position: absolute;
+            left: 600px;
+        }
+    </style>
+    <script>
+
+        window.onload = function () {
+            var box1 = document.getElementById("box1");
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+
+            // btn01.onclick = function(){
+            //     clearInterval(timeout);
+            //    timeout = setInterval(() => {
+            //         var oldValue = parseInt(getComputedStyle(box1, null)["left"]);
+            //         var newValue = oldValue + 13;
+            //         if(newValue>500){
+            //             newValue = 500;
+            //         }
+            //         box1.style.left = newValue + "px";
+            //         //感觉这段可要可不要
+            //         // if(newValue>=500){
+            //         //     clearInterval(timeout);
+            //         // }
+            //     }, 30);
+            // };
+            // btn02.onclick = function(){
+            //     clearInterval(timeout);
+            //    timeout = setInterval(() => {
+            //         var oldValue = parseInt(getComputedStyle(box1, null)["left"]);
+            //         var newValue = oldValue - 13;
+            //         if(newValue<10){
+            //             newValue = 10;
+            //         }
+            //         box1.style.left = newValue + "px";
+            //         //感觉这段可要可不要
+            //         // if(newValue<=10){
+            //         //     clearInterval(timeout);
+            //         // }
+            //     }, 30);
+            // };
+            btn01.onclick = function () {
+                move(box1, 500, 12);
+            };
+            btn02.onclick = function () {
+                move(box1, 10, 12);
+            };
+            btn03.onclick = function () {
+                clearInterval(timeout);
+            };
+
+
+        };
+        var timeout;
+        //创建一个可以执行简单动画功能的函数move()
+        /* 参数：obj移动目标 target移动位置限制 speed移动速度 */
+        //bug1:一按左移就直接跳回原位置，非移动
+        function move(obj, target, speed) {
+            clearInterval(timeout);
+            timeout = setInterval(() => {
+                var oldValue = parseInt(getComputedStyle(obj, null)["left"]);
+                //speed>0为向右移，speed<0为向左移对用户不友好
+                //统一规定speed>0，如何区分移动方向？
+                //当位置小于stopmin时应向右移，大于stopmax时向左移
+                //oldValue<target,speed>0 oldValue>target,speed<0
+                //重点bug1：因为在第二次循环的时候本身speed为负值，这里取反又变回正值了
+                //导致下面执行newValue=target
+                //故加上&& speed > 0
+                if (oldValue > target && speed > 0) {
+                    speed = -speed;
+                }
+                var newValue = oldValue + speed;
+                if ((speed > 0 && newValue > target) || (speed < 0 && newValue < target)) {
+                    newValue = target;
+                }
+                obj.style.left = newValue + "px";
+            }, 300);
+        }
+    </script>
+</head>
+
+<body>
+    <button id="btn01">开始右移</button>
+    <button id="btn02">开始左移</button>
+    <button id="btn03">停止移动</button>
+    <br><br>
+    <div id="box1"></div>
+    <div id="stopmin"></div>
+    <div id="stopmax"></div>
+</body>
+
+</html>
