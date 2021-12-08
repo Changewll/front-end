@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图01</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: blanchedalmond;
+        }
+        img{
+            width: 500px;
+            height: 350px;
+        }
+        #outer{
+            /* width: 500px; */
+            width: 520px;
+            height: 350px;
+            /*1. 需要设置宽高之后再居中 */
+            margin: 0 auto;
+            background-color: #baf;
+            padding: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #imgList{
+            list-style: none;
+            /* width: 2500px; */
+            /* 希望不用固定，用js解决增加图片后宽度变化 */
+            /* width: 2600px;   */
+            /* 给ul开启绝对定位，此时父元素是html */
+            /* 应再给div开启相对定位 */
+            position: absolute;
+            /* 向左移520px 显示下一张 */
+            left: -520px;
+            /* 移除溢出图片不能在ul设置，要在div */
+            /* overflow: hidden; */
+        }
+       #imgList li{
+            /*2. 需要给ul设置宽度才能浮动 */
+            width: 500px;
+            float: left;
+            margin: 0 10px;
+        }
+        #navDiv {
+            position: absolute;
+            /* z-index: 999; */
+            bottom: 12px;
+            /* 设置导航条居中方法一 */
+            /* left: 50%;
+            transform: translateX(-50%); */
+            /* 方法二 设置left值=(outer_width-navDic_width)/2=210 */
+            /* outer_width=520  navDiv_width=20*5=100  */
+            /* 这种方法会固定，当增加或减少a就会不居中了，所以用js实现 */
+            /* left: 210px; */
+        }
+        #navDiv a{
+            width: 10px;
+            height: 10px;
+            /* display: block; */
+            /* 设置浮动元素会有行内块的特性 */
+            /* 为什么字会往下：因为字体大小超过了*/
+            float: left;
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+        }
+        #navDiv a:hover{
+            background-color: black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //获取ul
+            var imgList = document.getElementById("imgList");
+            //获取img
+            var imgArr = document.getElementsByTagName("img");
+            //设置imgList的宽度
+            imgList.style.width = 520 * imgArr.length + "px";
+            // 要设置navDiv的left,需要outer宽度和navDiv宽度
+            var outer = document.getElementById("outer");
+            var navDiv = document.getElementById("navDiv");
+            //offsetLeft返回当前元素相对于定位祖先元素的水平偏移量
+            //offsetWidth获取元素的整个宽度和高度（包含内容区、内边距和边框）
+            // 记得加“px”
+            navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px"; 
+            //设置初始第一个导航粒为黑色
+            var aAll = document.getElementsByTagName("a");
+            var index = 0;
+            aAll[index].style.backgroundColor = "black";
+        };
+    </script>
+</head>
+<body>
+    <!-- 创建一个外部div来作为大的容器 -->
+    <div id="outer">
+        <!-- 创建一个ul用于放置图片 -->
+        <ul id="imgList">
+            <li><img src="../img/01.webp" alt=""></li>
+            <li><img src="../img/02.webp" alt=""></li>
+            <li><img src="../img/03.webp" alt=""></li>
+            <li><img src="../img/04.webp" alt=""></li>
+            <li><img src="../img/05.webp" alt=""></li>
+        </ul>
+        <!-- #创建导航div -->
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+    
+</body>
+</html>

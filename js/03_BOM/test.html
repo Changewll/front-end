@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试外边距</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-left: 10px;
+            border: steelblue 5px solid;
+            margin-bottom: 5px;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            padding: 10px;
+            border: blueviolet 5px solid;
+        }
+        #box3{
+            width: 50px;
+            height: 50px;
+            background-color: slateblue;
+        }
+        #box4{
+            width: 50px;
+            height: 50px;
+            background-color: blanchedalmond;
+        }
+        /* 子元素的margin是相对父元素什么的 */
+        #box5{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            
+        }
+        #box6{
+            width: 50px;
+            height: 50px;
+            background-color: wheat;
+            margin-left: 30px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box4"></div>
+    </div>
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+    <div id="box5">
+        <div id="box6"></div>
+    </div>
+</body>
+</html>
