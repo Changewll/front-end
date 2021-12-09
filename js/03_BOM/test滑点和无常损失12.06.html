@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滑点和无常损失</title>
+    <script>
+        window.onload = function(){
+            var r1 = 1000;
+            var r2 = 1000;
+            var x1Arr = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+            var sArr = [];
+            var pArr = [];
+            var lArr = [];
+            for(var i=0; i<x1Arr.length; i++){
+                si = x1Arr[i]/r1;
+                sArr.push(si);
+                pi = Math.pow(1+x1Arr[i]/r1, 2)-1;
+                //alert(pi);
+                pArr.push(pi);
+                li = 2*Math.sqrt(1+pi)/(2+pi)-1;
+                lArr.push(li);
+            }
+            for(var i=0; i<x1Arr.length; i++){
+               console.log("x1:"+x1Arr[i]);
+               
+            }
+            for(var i=0; i<x1Arr.length; i++){
+               
+               console.log("x1/r1:"+x1Arr[i]/r1);
+               
+            }
+            for(var i=0; i<x1Arr.length; i++){
+               
+               console.log("s:"+sArr[i]);
+               
+            }
+            for(var i=0; i<x1Arr.length; i++){
+              
+               console.log("p:"+pArr[i]);
+               
+            }
+            for(var i=0; i<x1Arr.length; i++){
+               
+               
+               console.log("l:"+lArr[i]); 
+            }
+            
+            
+        };
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
