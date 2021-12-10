@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二级菜单</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a,
+        img {
+            border: 0;
+            text-decoration: none;
+        }
+
+        body {
+            font: 12px/180% arial, helvetica, sans-serif, "新宋体";
+        }
+    </style>
+    <link rel="stylesheet" href="../css/sdmenu.css">
+    <script src="../tools.js"></script>
+    <script>
+        window.onload = function () {
+            //1.点击span展开,注意不是div
+            // var menuSpan = document.getElementsByTagName("menuSpan");
+            // querySelector() 方法仅仅返回匹配指定选择器的第一个元素。如果你需要返回所有的元素，请使用 querySelectorAll() 方法替代。
+            //获取所有的class为menuSpan的元素
+            var menuSpan = document.querySelectorAll(".menuSpan");
+            //3.1 初始化已展开div
+            var openDiv = menuSpan[0].parentElement;
+            // 为span添加单击响应函数
+            for (var i = 0; i < menuSpan.length; i++) {
+                // menuSpan[i].num = i;
+                menuSpan[i].onclick = function () {
+                    // alert(this);
+                    //2.点击span就要操作对应div移除class属性值collapsed
+                    var parentDiv = this.parentElement;
+                    //关闭parentDiv
+                    // addClass(parentDiv, "collapsed");
+                    toggleClass(parentDiv, "collapsed");
+                    //3.展开一个时需要其他的关闭
+                    // addClass(openDiv, "collapsed");
+                    //4.1 判断点击的和点击前已展开的不是同一个,这个if不能用在toggle上
+                    if (parentDiv != openDiv && !hasClass(openDiv, "collapsed")) {
+                        //5.为了可以统一处理动画过渡效果，将add改成toggle
+                        //5.1 toggle不用移除功能，故if加上！hasClass
+                        // addClass(openDiv, "collapsed");
+                        toggleClass(openDiv, "collapsed");
+                    }
+                    // 3.2 修改已展开Div为当前点击的span父元素
+                    openDiv = parentDiv;
+                    //4.点击展开后，再点击折叠，再点击展开时无法展开，因为此时openDiv == parentDiv，add和toggle抵消了
+                        //openDiv=1，点击2，parentDiv=2，展开2，关闭1，openDiv=2    展开2
+                        //openDiv=2，点击2，parentDiv=2，关闭2，关闭2，openDiv=2    关闭2
+                        //openDiv=2，点击2，parentDiv=2，打开2，关闭2，openDiv=2    关闭2
+                        //openDiv=2，点击2，parentDiv=2，关闭2，关闭2，openDiv=2    关闭2...
+                        //...怎么点击2都会是重复上一行循环，关闭2
+                        //需要变成
+                        //openDiv=2，点击2，parentDiv=2，打开2，不能再add openDiv=2
+                        //openDiv=2，点击2，parentDiv=2，关闭2，可以add也可以不add，openDiv=2
+                        
+                };
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="my_menu" class="sdmenu">
+        <div>
+            <span class="menuSpan">在线工具</span>
+            <a href="javascript:;">图像优化</a>
+            <a href="javascript:;">收藏夹图标生成器</a>
+            <a href="javascript:;">邮件</a>
+            <a href="javascript:;">htaccess密码</a>
+            <a href="javascript:;">梯度图像</a>
+            <a href="javascript:;">按钮生成器</a>
+        </div>
+        <div class="collapsed">
+            <span class="menuSpan">支持我们</span>
+            <a href="#">推荐我们</a>
+            <a href="#">链接我们</a>
+            <a href="#">网络资源</a>
+        </div>
+        <div class="collapsed">
+            <span class="menuSpan">合作伙伴</span>
+            <a href="#">JavaScript工具包</a>
+            <a href="#">CSS驱动</a>
+            <a href="#">CodingForums</a>
+            <a href="#">CSS例子</a>
+        </div>
+        <div class="collapsed">
+            <span class="menuSpan">测试电流</span>
+            <a href="#">测试1</a>
+            <a href="#">测试2</a>
+            <a href="#">测试3</a>
+            <a href="#">测试4</a>
+            <a href="#">测试5</a>
+        </div>
+    </div>
+</body>
+
+</html>

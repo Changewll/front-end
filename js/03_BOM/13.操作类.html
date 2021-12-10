@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类的操作</title>
+    <style>
+        .b1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .b2{
+            width: 200px;
+            height: 500px;
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var btn01 = document.getElementById("btn01");
+            var box1 = document.getElementById("box1");
+            btn01.onclick = function(){
+                // 1.使用style属性修改元素样式，每修改一个样式，浏览器就要重新渲染一次页面，性能差
+                // box1.style.width = 200+"px";            
+                // box1.style.height = 500+"px";
+                // box1.style.backgroundColor = "yellow";
+                // 2.直接修改类,即可修改多个样式
+                // box1.className = "b2";
+                //3.在原有基础上添加样式,但会无限增加b2
+                // box1.className += " b2";
+
+                //addClass(box1, "b2");
+                //removeClass(box1, "b2");
+                toggleClass(box1, "b2");
+            };
+
+        };
+
+        // 4.定义一个函数，在原来基础上添加指定的class属性值
+        // 参数：obj 要添加class属性的元素，对象
+        //       cn 要添加的class值，字符串
+        function addClass(obj, cn){
+            if(!hasClass(obj, cn)){
+                obj.className += " " + cn;
+            }
+            
+        }
+        // 5.定义一个函数，判断一个元素是否含有指定的class属性值
+        //返回值：true表示有，false表示无
+        function hasClass(obj, cn){
+            //6.创建一个正则表达式，但出现b212连字无效，故添加\b单词边界
+            // var reg = /\bb2\b/;
+            // if(reg.test(obj.className)){
+            //     return true;
+            // }else{
+            //     return false;
+            // }
+            //7.另一种创建正则表达式的方法
+            //new RegExp()
+            var reg = new RegExp("\\b"+cn+"\\b");
+            // alert(reg);
+            return reg.test(obj.className);
+        }
+        // 8.定义一个函数，移除指定的class属性值
+        function removeClass(obj, cn){
+            //创建一个正则表达式
+            var reg = new RegExp("\\b"+cn+"\\b");
+            obj.className = obj.className.replace(reg, "");
+        }
+
+        //9.定义函数toggleClass可以用来切换一个类
+        //10.定义的函数都可以在classList中找到，或者jQuery
+        
+        function toggleClass(obj, cn){
+            if(hasClass(obj, cn)){
+                removeClass(obj, cn);
+            }else{
+                addClass(obj, cn);
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <button id="btn01">点击按钮后修改box1的样式</button>
+    <br><br>
+    <div id="box1" class="b1"></div>
+</body>
+</html>
