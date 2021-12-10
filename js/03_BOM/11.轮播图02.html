@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>轮播图02</title>
+    <script src="./09.定时器的应用2.html"></script>
     <style>
         *{
             margin: 0;
@@ -13,17 +14,121 @@
         body{
             background-color: #bfa;
         }
+        img{
+            width: 500px;
+            height: 350px;
+        }
         #outer{
+            width: 520px;
+            height: 350px;
+            margin: 10px auto;
+            padding: 10px 0;
+            overflow: hidden;
+            background-color: #baf;
+            position: relative;
+        }
+        #imgList {
+            list-style: none;
+            /* width: 2600px; */
+            /* 1.li浮动导致ul高度塌陷了 */
+            /* border: teal 5px solid; */
+            /* display: inline-block; */
+            /* 3.记得给父元素也开启定位，left是距离父元素border的距离（没有border就padding） */
+            /* 4.不太理解left数值怎么设置的？ */
+            position: absolute;
+            /* left: -1040px; */
+        }
+        /* #imgList::after{
+            clear: both;
+        } */
+        #imgList li{
+            width: 500px;
+            float: left;
+            /* margin-right: 10px; */
+            margin: 0 10px;
+            /* 2.不是给li开启定位，是给ul开启定位 */
+            /* position: absolute; */
+
+        }
+
+        #navDiv{
+            /* 6.要开启定位导航标才能在上面 */
+            position: absolute;
+            bottom: 12px;
+            /* 居中 */
+            /* left: 50%;
+            transform: translateX(-50%); */
+            /* 520-100=420 420/2=210 */
+            /* left: 210px; */
+
+        }
+        #navDiv a{
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            margin: 0 5px;
+            /* 5.在没有内容时，开启行内块或者浮动才能看到红方块 */
+            /* display: inline-block;
+            z-index: 99; */
+            float: left;
+            opacity: 0.5;
             
+        }
+        #navDiv a:hover{
+            background-color: rgb(59, 49, 49);
+            /* opacity: 50%; */
         }
     </style>
     <script>
         window.onload = function(){
             //实现插入图片
+            // var imgList = document.getElementById("imgList");
+            // var li = document.createElement("li");
+            // for(var i=2; i<6; i++){
+            //     li.innerHTML = "<img src=/"+"../img/0"+i+'.webp"'+'alt="">';
+            // }
+            //改变#imgList的width
             var imgList = document.getElementById("imgList");
-            var li = document.createElement("li");
-            for(var i=2; i<6; i++){
-                li.innerHTML = "<img src=/"+"../img/0"+i+'.webp"'+'alt="">';
+            var imgArr = document.getElementsByTagName("img");
+            imgList.style.width = 520 * imgArr.length + "px";
+            //设置#navDiv居中
+            var navDiv = document.getElementById("navDiv");
+            var outer = document.getElementById("outer");
+            //offsetLeft返回当前元素相对于定位祖先元素的水平偏移量
+            //offsetWidth获取元素的整个宽度和高度（包含内容区、内边距和边框）
+            //clientWidth不包括边框
+            // 6.记得加“px”
+            navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth) / 2 + "px";
+            var index = 0;
+            var aAll = document.getElementsByTagName("a");
+            aAll[index].style.backgroundColor = "black";
+            //自动切换图片，使用move（obj，target，speed）
+            //move()
+            //点击导航标（超链接）切换到指定图片
+            //为所有超链接绑定单击响应函数
+            for(var i=0; i<aAll.length; i++){
+                //法二：为每个超链接都添加一个属性标识num（index）
+                aAll[i].num = i;
+                aAll[i].onclick = function(){
+                    // 7.先执行完for循环再执行单击响应函数
+                    //所以下面不能这么写，i始终等于5
+                    //alert(i);
+                    //法一：如果将var i改成let i就可以这么写
+                    // imgList.style.left = -520 * i + "px";
+                    // 法二:虽然i=5，但是this还是指向点击的那个超链接
+                    //alert(this.num);
+                    //alert(aAll[i].num);undefined
+                    index = this.num;
+                    imgList.style.left = -520 * index + "px";
+                    aAll[index].style.backgroundColor = "black";
+                    setA();
+                };
+            }
+            function setA(){
+                for(var i=0; i<aAll.length; i++){
+                    aAll[i].style.backgroundColor = "red";
+                }
+                aAll[index].style.backgroundColor = "black";
             }
             
         };
@@ -31,9 +136,20 @@
 </head>
 <body>
     <div id="outer">
-        <ul id="imgLiist">
+        <ul id="imgList">
             <li><img src="../img/01.webp" alt=""></li>
+            <li><img src="../img/02.webp" alt=""></li>
+            <li><img src="../img/03.webp" alt=""></li>
+            <li><img src="../img/04.webp" alt=""></li>
+            <li><img src="../img/05.webp" alt=""></li>
         </ul>
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
     </div>
 </body>
 </html>
