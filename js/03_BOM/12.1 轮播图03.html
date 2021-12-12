@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: burlywood;
+    }
+
+    #imgList img {
+        width: 500px;
+        height: 350px;
+    }
+
+    #outer {
+        width: 520px;
+        height: 350px;
+        margin: 10px auto;
+        padding: 10px 0;
+        background-color: blueviolet;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #imgList {
+        list-style: none;
+        /* width: 2600px; */
+        position: absolute;
+        /* left: -520px; */
+        /* z-index: 100; */
+    }
+
+    #imgList li {
+        width: 500px;
+        float: left;
+        margin: 0 10px;
+        
+    }
+    /* 注意大小写！ */
+    #navDiv{
+        position: absolute;
+        bottom: 12px;
+        /* left: 50%;
+        transform: translateX(-50%); */
+        /* left: 210px; */
+    }
+
+    #navDiv a{
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        margin: 0 5px;
+        float: left;
+        opacity: 0.5;
+        /* z-index: 199; */
+    }
+    
+    #navDiv a:hover{
+        background-color: black;
+    }
+</style>
+<script>
+    window.onload = function(){
+        var imgArr = document.getElementsByTagName("img");
+        var imgList = document.getElementById("imgList");
+        imgList.style.width = imgArr.length * 520 + "px";
+        var outer = document.getElementById("outer");
+        var navDiv = document.getElementById("navDiv");
+        //注意加“px”
+        navDiv.style.left = (outer.offsetHeight - navDiv.offsetHeight) / 2 + "px";
+        var aAll = document.getElementsByTagName("a");
+        var index = 0;
+        aAll[index].style.backgroundColor = "black";
+        for(var i=0; i<aAll.length; i++){
+            aAll[i].num = i;
+            aAll[i].onclick = function(){
+                index = this.num;
+                imgList.style.left = -520 * index + "px";
+                aAll[index].style.backgroundColor = "black";
+                setA(aAll, index);
+            };
+        }
+
+    };
+    function setA(obj, index){
+        for(var i=0; i<obj.length; i++){
+            obj[i].style.backgroundColor = "red";
+        }
+        obj[index].style.backgroundColor = "black";
+    }
+</script>
+
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="../img/01.webp" alt=""></li>
+            <li><img src="../img/02.webp" alt=""></li>
+            <li><img src="../img/03.webp" alt=""></li>
+            <li><img src="../img/04.webp" alt=""></li>
+            <li><img src="../img/05.webp" alt=""></li>
+        </ul>
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+</body>
+
+</html>
