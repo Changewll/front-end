@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+    <script>
+        // JSON：JavaScript objection notation
+        // JS中的对象只有JS认识，其他语言不认识
+        // JSON就是一个特殊格式的字符串，可以被任意语言识别，
+        // 并且可以转换为任意语言中的对象，JSON在开发中主要用来数据的交互
+        // JSON与JS对象的格式一样，只不过JSON字符串中的属性名必须加双引号，其他和JS语法一致
+        // JSON分类：1.对象{} 2.数组{}
+        // JSON中允许的值：1.字符串 2.数值 3.布尔值 4.null 5.对象 6.数组
+
+
+
+        var obj1 = {"name":"Alice", "age":18, "gender":"female"};
+        var obj2 = [1, 2, 3, "hello", true, obj1];
+        // console.log(obj.age);
+
+        // JSON字符串转换成js对象
+        // JSON.parse(json字符串)
+        var json1 = '{"name":"Alice", "age":18, "gender":"female"}';
+        var js1 = JSON.parse(json1);
+        console.log(js1.name);
+        // var json2 = '[1, 2, 3, "hello", true, obj1]';//错误
+        // var json2 = '[1, 2, 3, "hello", true, json1]';//错误
+        var json2 = '[1, 2, 3, "hello", true]';
+        var js2 = JSON.parse(json2);
+        // console.log("("+js2[4]+")");
+        console.log(js2[2]);
+
+        //js对象转换成JSON字符串
+        //JSON.stringify(js对象)
+        var json3 = JSON.stringify(obj1);
+        console.log(json3);
+
+        //ie没有json，用eval（）可以执行一段js代码，并将执行结果返回
+        //如果执行的字符串中含有{}，会将其当成代码块，需要在字符串前后各加一个（）
+        var str = '{"name":"Alice", "age":18, "gender":"female"}';
+        var str2 = 'alert("Hello")';
+        eval(str);
+        eval("("+str2+")");
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

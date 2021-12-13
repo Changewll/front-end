@@ -42,10 +42,11 @@
         width: 500px;
         float: left;
         margin: 0 10px;
-        
+
     }
+
     /* 注意大小写！ */
-    #navDiv{
+    #navDiv {
         position: absolute;
         bottom: 12px;
         /* left: 50%;
@@ -53,7 +54,7 @@
         /* left: 210px; */
     }
 
-    #navDiv a{
+    #navDiv a {
         width: 10px;
         height: 10px;
         background-color: red;
@@ -62,13 +63,13 @@
         opacity: 0.5;
         /* z-index: 199; */
     }
-    
-    #navDiv a:hover{
+
+    #navDiv a:hover {
         background-color: black;
     }
 </style>
 <script>
-    window.onload = function(){
+    window.onload = function () {
         var imgArr = document.getElementsByTagName("img");
         var imgList = document.getElementById("imgList");
         imgList.style.width = imgArr.length * 520 + "px";
@@ -79,23 +80,83 @@
         var aAll = document.getElementsByTagName("a");
         var index = 0;
         aAll[index].style.backgroundColor = "black";
-        for(var i=0; i<aAll.length; i++){
+        var timer;
+        for (var i = 0; i < aAll.length; i++) {
             aAll[i].num = i;
-            aAll[i].onclick = function(){
+            aAll[i].onclick = function () {
+                //6.点击的时候关闭自动切换的定时器,但这样点击完就不会继续自动切换了
+                clearInterval(timer);
                 index = this.num;
-                imgList.style.left = -520 * index + "px";
-                aAll[index].style.backgroundColor = "black";
-                setA(aAll, index);
+                // imgList.style.left = -520 * index + "px";
+                move(imgList, "left", -520 * index, 30, function () {
+                    //7.所以在这里开启自动切换的定时器
+                    autoChange();
+                });
+                // aAll[index].style.backgroundColor = "black";
+                setA();
             };
         }
-
-    };
-    function setA(obj, index){
-        for(var i=0; i<obj.length; i++){
-            obj[i].style.backgroundColor = "red";
+        //1.自动切换图片
+        autoChange();
+        // move(imgList, "left", -520*imgArr.length, 10, function(){});
+        function setA() {
+            //4.判断当前索引是否是最后一张图片
+            if(index >= imgArr.length -1){
+                index = 0;
+                //5.此时显示的最后一张与第一张一模一样，通过css将最后一张迅速切换成第一张
+                imgList.style. left = 0;
+            }
+            for (var i = 0; i < aAll.length; i++) {
+                //去掉red，鼠标移入才能变黑
+                aAll[i].style.backgroundColor = "";
+            }
+            aAll[index].style.backgroundColor = "black";
         }
-        obj[index].style.backgroundColor = "black";
+        // 1.1创建一个函数，用来开启自动切换图片
+        function autoChange() {
+            timer = setInterval(function () {
+                index = index+1;
+                console.log(index);
+                //3.判断index值
+                index = index % imgArr.length ;
+                console.log(index);
+                move(imgList, "left", -520 * index, 20, function (){
+                    //2.修改导航按钮
+                    setA();
+                });
+            }, 2000);
+        }
+    };
+
+
+    function move(obj, attr, target, speed, callback) {
+        clearInterval(obj.timer);
+        var current = parseInt(getStyle(obj, attr));
+        if (current > target) {
+            speed = -speed;
+        }
+        obj.timer = setInterval(function () {
+            var oldValue = parseInt(getStyle(obj, attr));
+            var newValue = oldValue + speed;
+            if ((newValue > target && speed > 0) || (newValue < target && speed < 0)) {
+                newValue = target;
+            }
+            obj.style[attr] = newValue + "px";
+            if (newValue == target) {
+                clearInterval(obj.timer);
+                callback && callback();
+            }
+        }, 30);
     }
+
+    function getStyle(obj, name) {
+        if (window.getComputedStyle) {
+            return getComputedStyle(obj, null)[name];
+        } else {
+            return obj.currentStyle[name];
+        }
+    }
+
 </script>
 
 <body>
@@ -106,6 +167,7 @@
             <li><img src="../img/03.webp" alt=""></li>
             <li><img src="../img/04.webp" alt=""></li>
             <li><img src="../img/05.webp" alt=""></li>
+            <li><img src="../img/01.webp" alt=""></li>
         </ul>
         <div id="navDiv">
             <a href="javascript:;"></a>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据类型</title>
+</head>
+<body>
+    数据类型
+    1.分类
+        *基本（值）类型
+            * String：任意字符串
+            * Number：任意的数字
+            * boolean：true/false
+            * undefined：undefined
+            * null：null
+        *对象（引用）类型
+            * Object：任意对象
+            * Function：一种特别的对象（可以执行）
+            * Array：一种特别的对象（数值下标，内部数据是有序的）
+    2.判断
+        * typeof:
+            * 返回数据类型的字符串表达
+            * 可以判断：undefined、数值、字符串、布尔值、function
+            *  不能判断：null与object object与array
+        * instanceof:
+            * 判断对象的具体类型
+        * ===（不会做数据转换）/ ==（会做数据转换）
+            * 可以判断：undefined、null
+
+<script>
+    //1.基本
+    //typeof返回数据类型的字符串表达
+    var a;
+    console.log(a, typeof a, typeof a==='undefined', a===undefined);//undefined 'undefined' true true
+    console.log(undefined==='undefined');//false
+    a = 4;
+    console.log(typeof a==='number');//t
+    a = "atguigu";
+    console.log(typeof a==='string');//t
+    a = true;
+    console.log(typeof a==='boolean');//t
+    a = null;
+    console.log(typeof a==='null');//f
+    console.log(typeof a);//'object' type不能判断null和object
+    // console.log(typeof a===object);//error,object is undefined
+    console.log(typeof a===Object);//f
+    console.log(typeof a==="object");//t
+console.log("________");
+    //2.对象
+    //instanceof 判断前者是否是后者的实例
+    var b1 = {
+        b2: [1, 'abc', console.log],
+        b3: function(){
+            console.log('b3');
+            return function(){
+                return console.log;
+            };
+        }
+    }
+    //new Object（）, Object()是构造函数
+    console.log(b1 instanceof Object, b1 instanceof Array);//t f
+    console.log(b1.b2 instanceof Array, b1.b2 instanceof Object);//t t
+    console.log(b1.b3 instanceof Function, b1.b3 instanceof Object);//t t
+    console.log(typeof b1.b2);//'object'
+
+    console.log(typeof b1.b3 === 'function');//t
+    console.log(typeof b1.b2[2] === 'function')//t
+    console.log(b1.b2[2]("iloveu"));//iloveu undefined
+    console.log(b1.b3()()("iloveu"));//b3 iloveu undefined
+
+</script>
+</body>
+</html>
